@@ -1,0 +1,88 @@
+#include<iostream>
+using namespace std;
+class Stack{
+        char* arr;
+        int size;
+        int top;
+    public:
+        Stack(int s){
+            size=s;
+            top=-1;
+            arr=new char[s];
+        }
+        void push(char v){
+            if(top==size-1){
+                cout<<"Stack overflow!!"<<endl;
+            }
+            else{
+                top++;
+                arr[top]=v;
+                cout<<"pushed "<<v<<" into the stack"<<endl;
+            }
+        }
+
+        void pop(){
+            if(top==-1){
+                cout<<"Stack underflow!!"<<endl;
+            }
+            else{
+                cout<<"Popped "<<arr[top]<<" from the stack"<<endl;
+                top--;
+            }
+        }
+
+        void display(){
+            if(top==-1){
+                cout<<"Stack is empty!!"<<endl;
+            }
+            else{
+                for(int i=top;i>=0;i--){
+                cout << arr[i] << "  ";
+                }
+                cout<<endl;
+            }
+        }
+
+        bool isempty(){
+            if(top==-1){
+                return 1;
+            }
+            else{
+                return 0;
+            }
+        }
+};
+
+bool check(string str) {
+    Stack s(str.size());
+    for (int i =0; i < int(str.size()); i++) {
+        if (str[i] == '(') {
+            s.push(str[i]);
+        } 
+        else if (str[i] == ')') {
+            if (s.isempty()) {
+                return false;
+            }
+            s.pop();
+        }
+    }
+    return s.isempty();
+}
+
+
+
+int main()
+{
+    string str="((())))";
+
+    bool ans=check(str);
+
+    if (ans){
+        cout<<"Parentheses are balanced"<<endl;
+    }
+    else{
+        cout<<"Parentheses are not balanced"<<endl;
+
+    }
+
+}
